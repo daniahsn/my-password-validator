@@ -6,6 +6,8 @@ This repository contains the starter code for the second part of Penn CIS 3500's
 
 2. In this second part, you will implement a simple password validator and deploy it.
 
+The goal of this activity is to first deploy the unimplemented password validator, and once your deployment is successful, edit the `main.py` to implement the code logic that is missing, see `FIXME` comment.
+
 ## Instructions
 
 ### Initial Deployment
@@ -16,7 +18,7 @@ This repository contains the starter code for the second part of Penn CIS 3500's
 
 3. Once you are logged in to Render's dashboard, click on the `+ Add new` button and select `Blueprint`:
 
-    ![Render's dashboard, with the `+ Add new` menu opened and the `Blueprint` selected.](http://togetherwe.dev/tutorials/render-dashboard.png)
+    ![Render's dashboard, with the `+ Add new` menu opened and the `Blueprint` selected.](https://togetherwe.dev/tutorials/render-dashboard.png)
 
 4. In the following form, scroll down, and select `Public Git Repository` and choose the repository you forked in step 1. Please note:
 
@@ -26,17 +28,21 @@ This repository contains the starter code for the second part of Penn CIS 3500's
 
     - We are using the **Infrastructure as Code** approach, where the configuration for the deployment is stored in the repository itself, in the file `render.yaml` using Render's Blueprint format (see [full documentation here](https://render.com/docs/blueprint-spec)). This is a best practice, as it allows you to version-control your deployment configuration. **For this reason, you should not have to provide any configuration beyond the URL to your GitHub repository.**
 
-5. Once your app has been added, Render will start building and deploying an initial release. You can see the progress in the dashboard. Once it is done, you will see a URL for your app. Click on it to see your app live.
+5. In the following screen, you can provide any "`Blueprint Name`" you want, the `main` branch should be selected, and click on the "`Deploy Blueprint`" button.
+
+    ![Render, in the process of deploying a Blueprint project.](https://togetherwe.dev/tutorials/render-my-password-validator-deploy.png)
+
+6. Once your app has been added, Render will start building and deploying an initial release. You can see the progress in the dashboard. Once it is done, you will see a URL for your app. Click on it to see your app live.
 
 > Hello from my Password Validator! — `lumbroso@seas.upenn.edu`
 
-6. Don't forget to change the `AUTHOR` variable in the `main.py` file to your own Penn email address!
+7. Don't forget to change the `AUTHOR` variable in the `main.py` file to your own Penn email address!
 
 ### Local Development
 
 The above instructions should help you deploy this project to Render. However, you may want to run the project locally for development purposes.
 
-To do so, you will need to have Python 3 installed on your machine.
+To do so, you will need to have Python 3 installed on your machine. If Python 3 is not installed, we recommend you install it using [Homebrew](https://brew.sh/) which can be used both on macOS and Windows (Windows Subsystem for Linux): `brew install python3`.
 
 1. Clone your repository to your local machine.
 
@@ -65,7 +71,9 @@ In this section, replace `https://password-validator.onrender.com/` with the URL
 
 **Browser test:** Go to https://password-validator.onrender.com/; you should see the "`Hello from my Password Validator!`" text.
 
-**Endpoint test:** You can test the password validation endpoint by sending a POST request with a JSON body. For example, using `curl`:
+**Endpoint test:** You can test the password validation endpoint by sending a POST request with a JSON body. For example, using `curl`, this request my look like this:
+
+⚠️ _Warning: Make sure to replace the URL with your own! Make sure you are using the correct endpoint based on your code (the path must correspond to what you have in your `@app.route(...)` routes in `main.py`)._
 
 ```bash
 curl -X POST -H "Content-Type: application/json" \
@@ -73,7 +81,9 @@ curl -X POST -H "Content-Type: application/json" \
   https://password-validator.onrender.com/checkPassword
 ```
 
-This should initially return `{"reason":"Not implemented","valid":false}`.
+This is making a POST request to the `/v1/checkPassword` endpoint with a JSON dictionary, containing the key `"password"` mapped to the value `"Abc12345"`. The server should always respond with a JSON object containing two keys: `valid` and `reason`.
+
+Initially, before you've made any changes, it should return `{"reason":"Not implemented","valid":false}`.
 
 You can also use a tool like [RapidAPI](https://paw.cloud/) for macOS, or [Postman](https://www.postman.com/), for  to send the request.
 
