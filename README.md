@@ -8,11 +8,11 @@ This repository contains the starter code for the second part of Penn CIS 3500's
 
 The goal of this activity is to first deploy the unimplemented password validator, and once your deployment is successful, edit the `main.py` to implement the code logic that is missing, see `FIXME` comment. For instance, you might start by checking the length of the password, based on the password policy that you were assigned (here we are checking a length of 10):
 
-    ```python
-    # check length requirement
-    if len(pw) < 10:
-        return flask.jsonify({"valid": False, "reason": "Password too short"}), 200
-    ```
+```python
+# check length requirement
+if len(pw) < 10:
+    return flask.jsonify({"valid": False, "reason": "Password too short"}), 200
+```
 
 ## Instructions
 
