@@ -6,7 +6,13 @@ This repository contains the starter code for the second part of Penn CIS 3500's
 
 2. In this second part, you will implement a simple password validator and deploy it.
 
-The goal of this activity is to first deploy the unimplemented password validator, and once your deployment is successful, edit the `main.py` to implement the code logic that is missing, see `FIXME` comment.
+The goal of this activity is to first deploy the unimplemented password validator, and once your deployment is successful, edit the `main.py` to implement the code logic that is missing, see `FIXME` comment. For instance, you might start by checking the length of the password, based on the password policy that you were assigned (here we are checking a length of 10):
+
+    ```python
+    # check length requirement
+    if len(pw) < 10:
+        return flask.jsonify({"valid": False, "reason": "Password too short"}), 200
+    ```
 
 ## Instructions
 
@@ -164,5 +170,7 @@ Initially all passwords are considered invalid, and the app returns an HTTP stat
 
 
 ## Credits
+
+This activity was designed by Jérémie O. Lumbroso in Spring 2025 for CIS 3500 at the University of Pennsylvania, and refined thanks to the feedback of the students from the class.
 
 The list of banned passwords is from [this repository](https://github.com/danielmiessler/SecLists/blob/master/Passwords/Common-Credentials/10-million-password-list-top-1000.txt).
